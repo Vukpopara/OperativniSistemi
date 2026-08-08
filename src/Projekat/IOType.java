@@ -1,6 +1,6 @@
 package Projekat;
 
-public class IOType {
+public enum IOType {
     READ,
     WRITE
 }
