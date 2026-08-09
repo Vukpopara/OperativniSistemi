@@ -35,6 +35,11 @@ public class IOOperation {
     public void setDuration(int duration) {
         this.duration = duration;
     }
+    public void tick() {
+        if (duration > 0) {
+            duration--;
+        }
+    }
 
     @Override
     public String toString() {
