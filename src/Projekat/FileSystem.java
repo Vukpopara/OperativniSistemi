@@ -68,7 +68,7 @@ public class FileSystem {
             if (child instanceof Directory) {
                 current = (Directory) child;
             } else {
-                return child; // Ako je fajl, vrati ga odmah
+                return child;
             }
         }
         return current;
@@ -82,8 +82,8 @@ public class FileSystem {
 
             FsNode next = current.getChild(part);
             if (next == null) {
-                // Ako putanja ne postoji, automatski kreira među-direktorijume
-                next = new Directory(part, current);
+
+                 next = new Directory(part, current);
                 current.addChild(next);
             }
             if (next instanceof Directory) {
