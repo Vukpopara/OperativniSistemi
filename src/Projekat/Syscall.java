@@ -1,34 +1,27 @@
 package Projekat;
 
-public class Syscall {
-    private final SyscallType type;
-    private final int processId;
-    private final Object parameters;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Syscall(SyscallType type, int processId, Object parameters) {
+public class Syscall {
+    private SyscallType type;
+    private List<String> args;
+
+    public Syscall(SyscallType type) {
         this.type = type;
-        this.processId = processId;
-        this.parameters = parameters;
+        this.args = new ArrayList<>();
+    }
+
+    public Syscall(SyscallType type, List<String> args) {
+        this.type = type;
+        this.args = args != null ? args : new ArrayList<>();
     }
 
     public SyscallType getType() {
         return type;
     }
 
-    public int getProcessId() {
-        return processId;
-    }
-
-    public Object getParameters() {
-        return parameters;
-    }
-
-    @Override
-    public String toString() {
-        return "Syscall{" +
-                "type=" + type +
-                ", processId=" + processId +
-                ", parameters=" + parameters +
-                '}';
+    public List<String> getArgs() {
+        return args;
     }
 }

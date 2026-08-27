@@ -1,26 +1,25 @@
 package Projekat;
 
-public class XScheduler extends Scheduler {
+public class XScheduler implements Scheduler {
+    private int timeQuantum;
 
-    public XScheduler(ReadyQueue readyQueue, BlockedQueue blockedQueue, CPU cpu) {
-        super(readyQueue, blockedQueue, cpu);
+    public XScheduler(int timeQuantum) {
+        this.timeQuantum = timeQuantum;
     }
 
     @Override
-    public synchronized void dispatch() {
-        PCB current = getCpu().getCurrentProcess();
-
-        if (current != null && (current.getState() == ProcessState.TERMINATED || current.getState() == ProcessState.BLOCKED)) {
-            getCpu().setCurrentProcess(null);
+    public PCB chooseNext(ReadyQueue ready) {
+        if (ready == null || ready.isEmpty()) {
+            return null;
         }
-
-        super.dispatch();
+        return ready.getNextProcess();
     }
 
-    public synchronized void unblockProcess() {
-        PCB unblocked = getBlockedQueue().unblockNext();
-        if (unblocked != null) {
-            getReadyQueue().addProcess(unblocked);
-        }
+    public int getTimeQuantum() {
+        return timeQuantum;
+    }
+
+    public void setTimeQuantum(int timeQuantum) {
+        this.timeQuantum = timeQuantum;
     }
 }
