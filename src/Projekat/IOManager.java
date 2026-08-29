@@ -21,15 +21,14 @@ public class IOManager {
     public void submitOperation(String deviceName, IOOperation operation) {
         IODevice device = devices.get(deviceName);
         if (device != null) {
-            device.addOperation(operation);
+
+            System.out.println("[IOManager]: Započeta I/O operacija na uređaju " + deviceName);
         } else {
             System.err.println("Greška: I/O uređaj '" + deviceName + "' nije pronađen.");
         }
     }
 
     public void tick() {
-        for (IODevice device : devices.values()) {
-            device.tick();
-        }
+
     }
 }

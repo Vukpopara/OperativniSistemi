@@ -25,9 +25,20 @@ public class DiskDevice extends IODevice {
         this.fileBlockMap = new HashMap<>();
     }
 
+    @Override
+    public void startOperation(IOOperation op, PCB p) {
+        this.busy = true;
+        System.out.println("[DISK " + name + "]: Zapoceta operacija " + (op != null ? op.getType() : "UNKNOWN") + " za PID " + (p != null ? p.getPid() : -1));
+        this.busy = false;
+    }
+
+    @Override
+    public boolean isBusy() {
+        return busy;
+    }
+
     public void allocateFileSpace(File file) {
         if (file == null) return;
-
 
         int blocksToAllocate = 1;
 
@@ -46,6 +57,7 @@ public class DiskDevice extends IODevice {
         if (fileBlockMap.containsKey(file.getName())) {
             int allocated = fileBlockMap.remove(file.getName());
             freeBlocks += allocated;
-            System.out.println("[DISK " + name + "]: Oslobođeno " + allocated + " blok(a) za fajl: " + file.getName());
+            System.out.println("[DISK " + name + "]: Oslobodjeno " + allocated + " blok(a) za fajl: " + file.getName());
         }
     }
+}
