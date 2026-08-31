@@ -1,61 +1,35 @@
 package Projekat;
 
 public class MemorySegment {
-    private int startAddress;
+    private int baseAddress;
     private int size;
-    private boolean isFree;
-    private int processId;
+    private boolean allocated;
+    private int pid;
 
-    public MemorySegment(int startAddress, int size) {
-        this.startAddress = startAddress;
+    public MemorySegment(int baseAddress, int size) {
+        this.baseAddress = baseAddress;
         this.size = size;
-        this.isFree = true;
-        this.processId = -1;
+        this.allocated = false;
+        this.pid = -1;
     }
 
-    public int getStartAddress() {
-        return startAddress;
-    }
-
-    public void setStartAddress(int startAddress) {
-        this.startAddress = startAddress;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
+    public MemorySegment(int baseAddress, int size, boolean allocated, int pid) {
+        this.baseAddress = baseAddress;
         this.size = size;
+        this.allocated = allocated;
+        this.pid = pid;
     }
 
-    public boolean isFree() {
-        return isFree;
-    }
+    public int getBaseAddress() { return baseAddress; }
+    public int getStart() { return baseAddress; }
+    public void setBaseAddress(int baseAddress) { this.baseAddress = baseAddress; }
 
-    public void setFree(boolean free) {
-        isFree = free;
-        if (free) {
-            this.processId = -1;
-        }
-    }
+    public int getSize() { return size; }
+    public void setSize(int size) { this.size = size; }
 
-    public int getProcessId() {
-        return processId;
-    }
+    public boolean isAllocated() { return allocated; }
+    public void setAllocated(boolean allocated) { this.allocated = allocated; }
 
-    public void setProcessId(int processId) {
-        this.processId = processId;
-        this.isFree = (processId == -1);
-    }
-
-    @Override
-    public String toString() {
-        return "MemorySegment{" +
-                "startAddress=" + startAddress +
-                ", size=" + size +
-                ", isFree=" + isFree +
-                ", processId=" + processId +
-                '}';
-    }
+    public int getPid() { return pid; }
+    public void setPid(int pid) { this.pid = pid; }
 }
