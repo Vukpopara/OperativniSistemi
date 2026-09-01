@@ -1,5 +1,8 @@
 package Projekat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FileSystem {
     private Directory root;
     private DiskDevice disk;
@@ -82,8 +85,7 @@ public class FileSystem {
 
             FsNode next = current.getChild(part);
             if (next == null) {
-
-                 next = new Directory(part, current);
+                next = new Directory(part, current);
                 current.addChild(next);
             }
             if (next instanceof Directory) {
@@ -91,6 +93,17 @@ public class FileSystem {
             }
         }
         return current;
+    }
+
+    public List<FsNode> listDirectory(Directory dir) {
+        return new ArrayList<>(dir.getChildrenMap().values());
+    }
+
+    public Directory asDirectory(FsNode node) {
+        if (node instanceof Directory) {
+            return (Directory) node;
+        }
+        return null;
     }
 
     public Directory getRoot() {
