@@ -46,6 +46,19 @@ public class OSKernel {
         return pcb;
     }
 
+    public void startDMATransfer(int diskBlock, int ramAddress, int size) {
+        System.out.println("[DMA Kontroler]: Zapocet direktan prenos sa diska (Blok: " + diskBlock + ") na RAM adresu " + ramAddress + " (Velicina: " + size + "B)...");
+
+        handleInterrupt("DMA_TRANSFER_COMPLETE");
+    }
+
+    public void handleInterrupt(String interruptType) {
+        System.out.println("[Kernel Interrupt Handler]: Primljen prekid -> " + interruptType);
+        if ("DMA_TRANSFER_COMPLETE".equals(interruptType)) {
+            System.out.println("[Kernel]: DMA prenos uspjesno zavrsen. Podaci su u RAM-u bez opterecenja CPU-a.");
+        }
+    }
+
     public void executeAssemblyInstruction(String instruction) {
         if (instruction == null || instruction.isEmpty()) return;
 
