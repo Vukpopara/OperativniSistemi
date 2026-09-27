@@ -113,4 +113,7 @@ public class FileSystem {
     public DiskDevice getDisk() {
         return disk;
     }
+
+    public void printTree() {
+    }
 }
