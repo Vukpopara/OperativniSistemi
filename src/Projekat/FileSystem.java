@@ -116,4 +116,13 @@ public class FileSystem {
 
     public void printTree() {
     }
+
+    public void readFile(String path) {
+        OpenFileHandle handle = open(path);
+        if (handle != null && handle.getFile() != null) {
+            System.out.println("Uspješno otvoren fajl: " + handle.getFile().getName());
+        } else {
+            System.out.println("Greška: Fajl nije pronađen na putanji '" + path + "'.");
+        }
+    }
 }
